@@ -30,9 +30,11 @@
 ;(run "xturn" (somexturn) ((player 2 2) (index 3 3) (board 1 1)))
 
 (pred at-most-one-mark-per-square
-      (all ([b Board] [r Index] [c Index])
-           (or (int= (card (join b (join (join places r) c))) 1)
-               (int= (card (join b (join (join places r) c))) 0))))
+      (all ([b Board])
+           (all ([r Index])
+                (all ([c Index])
+                     (or (int= (card (join b (join (join places r) c))) 1)
+                         (int= (card (join b (join (join places r) c))) 0))))))
 
 
 (run "xturn" (at-most-one-mark-per-square (some ([b Board]) (xturn b))) ((Player 2 2) (Index 3 3) (Board 1 1)))
