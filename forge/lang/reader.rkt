@@ -2,6 +2,8 @@
 
 (require "ast.rkt" racket/runtime-path)
 
+(require "../../forge2/forge2/tokenizer.rkt" "../../forge2/forge2/parser.rkt")
+
 (define-runtime-path forge-path "../forge.rkt")
 
 ; this assumes that there's nothing sneakier than lists going on in the datum.
@@ -19,11 +21,13 @@
     
 
 (define (read-syntax path port)
-  (define src-datum (port->list read port))
-  ;(displayln src-lines)
+  (define parse-tree (parse path (make-tokenizer port)))
+  (define src-datum (cdr (syntax->datum parse-tree)))
+  ; (define src-datum (port->list read port))
+
   ; don't use format-datums, because it's awful with quotes.
   (define transformed (replace-ints src-datum))
-
+  (map println transformed)
   (define module-datum `(module kkcli ,forge-path
                           ,@transformed))
   (datum->syntax #f module-datum))

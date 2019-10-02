@@ -262,3 +262,7 @@
 
 (define (relation->bounds rel)
   (make-bound rel '() (apply cartesian-product (map (lambda (x) (hash-ref bounds-store x)) (hash-ref relations-store rel)))))
+
+(provide SigDecl CmdDecl)
+(define-syntax (SigDecl stx) #'(declare-sig animal))
+(define-syntax (CmdDecl stx) #'(run "run0" () ((animal 2 2))))

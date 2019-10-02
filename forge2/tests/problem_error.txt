@@ -1,0 +1,24 @@
+forge/sigs.rkt:268:48: animal: unbound identifier
+  in: animal
+  location...:
+   forge/sigs.rkt:268:48
+  context...:
+   do-raise-syntax-error
+   for-loop
+   [repeats 1 more time]
+   finish-bodys
+   lambda-clause-expander
+   for-loop
+   loop
+   [repeats 4 more times]
+   module-begin-k
+   expand-module16
+   expand-capturing-lifts
+   temp118_0
+   temp91_0
+   compile15
+   temp85_0
+   standard-module-name-resolver
+   ...
+'(SigDecl (NameList "Blah"))
+'(CmdDecl (Name "blah") "run" (Block (Expr (QualName "blah"))))
