@@ -37,7 +37,7 @@
 (define (fact form)
   (set! constraints (cons form constraints)))
 
-(provide declare-sig set-top-level-bound sigs run fact iden univ none no some one lone all + - ^ & ~ join ! set in declare-one-sig pred = -> * => not and or set-bitwidth < > add subtract multiply divide int= card sum) 
+(provide pre-declare-sig declare-sig set-top-level-bound sigs run fact iden univ none no some one lone all + - ^ & ~ join ! set in declare-one-sig pred = -> * => not and or set-bitwidth < > add subtract multiply divide int= card sum) 
 
 (define (add-relation rel types)
   (hash-set! relations-store rel types))
@@ -56,7 +56,7 @@
 (define (add-int-bound rel int-bound)
   (hash-set! int-bounds-store rel int-bound))
 
-(deifne-syntax (pre-declare-sig stx)
+(define-syntax (pre-declare-sig stx)
                (syntax-case stx ()
                  [(_ name)
                   #'(begin
