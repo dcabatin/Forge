@@ -25,7 +25,9 @@
 (define (is-sig-decl datum) (equal? (car datum) 'SigDecl)) 
 
 (define (pull-sigs datum)
-  (map (lambda (x) `(pre-declare-sig ,@(cdr (cdr x)))) (filter is-sig-decl datum)))
+  (map (lambda (x) (string->symbol (car (cdr (second x)))))
+       (begin
+         #|(println (filter is-sig-decl datum))|# (filter is-sig-decl datum))))
 
 
 (define (read-syntax path port)
@@ -38,9 +40,15 @@
   ; don't use format-datums, because it's awful with quotes.
   (define transformed (replace-ints src-datum))
 
-  (define sig-inits (pull-sigs transformed))
+  ;(println transformed)
 
-  (define final `(,@(car transformed) ,@(append sig-inits (cdr transformed))))
+  (define sig-inits (map (lambda (x) `(pre-declare-sig ,x)) (pull-sigs transformed)))
+
+  (println sig-inits)
+
+  (define final `(,@(append sig-inits transformed)))
+
+  (println final)
 
   (define module-datum `(module kkcli ,forge-path
                           ,@final))
@@ -49,4 +57,3 @@
   ; (browse-syntax stx)
   stx)
 (provide read-syntax)
-    
