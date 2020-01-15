@@ -40,7 +40,7 @@
   ; don't use format-datums, because it's awful with quotes.
   (define transformed (replace-ints src-datum))
 
-  ;(println transformed)
+  (println transformed)
 
   (define sig-inits (map (lambda (x) `(pre-declare-sig ,x)) (pull-sigs transformed)))
 
