@@ -84,7 +84,8 @@
     [(_ name)
      #'(begin
          ;(define name (declare-relation (list (symbol->string 'name)) (symbol->string 'name)))
-         ;(add-sig (symbol->string 'name)))]
+         ;(add-sig (symbol->string 'name))
+         )]
     [(_ name #:extends extends)
      #'(begin
          ;(define name (declare-relation (list (symbol->string 'name)) (symbol->string 'name)))
